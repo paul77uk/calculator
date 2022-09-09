@@ -21,6 +21,7 @@ const multiplyButton = document.querySelector('.multiply-button');
 const division = document.querySelector('.division-button');
 const equals = document.querySelector('.equals-button');
 const dot = document.querySelector('.dot');
+const backButton = document.querySelector('.back-button');
 
 const add = (a, b) => (a + b); 
 const subtract = (a, b) => a - b;
@@ -36,10 +37,17 @@ null;
 
 const numberListener = (num) => {
     num.addEventListener('click', () => {
-        // var number = "";
-        displayValue2 += num.textContent;
-        display.textContent = displayValue2;
-        // displayValue === null ? displayValue = number : displayValue2 = number;
+        if (displayValue2.includes('.')) {
+            if (num.textContent !== '.'){
+                displayValue2 += num.textContent;
+                display.textContent = displayValue2;
+            }
+        } else {
+            displayValue2 += num.textContent;
+            display.textContent = displayValue2;
+        }
+        
+        
     });
 }
 
@@ -49,6 +57,17 @@ const operatorListener = (operatorSign) => {
         displayValue = displayValue2;
         displayValue2 = "";
     });
+}
+
+const calculate = () => {
+    if (displayValue == "") {
+        display.textContent = displayValue2;
+    } else {
+        display.textContent = operate(operator, Number(displayValue), Number(displayValue2))
+        console.log(display.textContent);
+        displayValue2 = operate(operator, Number(displayValue), Number(displayValue2))
+        displayValue = "";
+    }
 }
 
 numberListener(zero);
@@ -63,47 +82,13 @@ numberListener(eight);
 numberListener(nine);
 numberListener(dot);
 
-// zero.addEventListener('click', () => {
-//     var num = zero.textContent;
-//     display.textContent = num;
-   
-//     displayValue === null ? displayValue = num : displayValue2 = num;
-    
-// });
-
-// eight.addEventListener('click', () => {
-//     var num = eight.textContent;
-//     display.textContent = num;
-   
-//     displayValue === null ? displayValue = num : displayValue2 = num;
-// });
-
 operatorListener(plus);
 operatorListener(minus);
 operatorListener(multiplyButton);
 operatorListener(division);
 
-// plus.addEventListener('click', () => {
-//     operator = plus.textContent;
-// });
-
-// minus.addEventListener('click', () => {
-//     operator = minus.textContent;
-// });
-
-// multiplyButton.addEventListener('click', () => {
-//     operator = multiplyButton.textContent;
-// });
-
-// division.addEventListener('click', () => {
-//     operator = division.textContent;
-// });
-
 equals.addEventListener('click', () => {
-    display.textContent = operate(operator, Number(displayValue), Number(displayValue2))
-    console.log(display.textContent);
-    displayValue2 = display.textContent;
-    displayValue = "";
+    calculate();
 });
 
 clear.addEventListener('click', () => {
@@ -111,6 +96,12 @@ clear.addEventListener('click', () => {
     displayValue = "";
     displayValue2 = "";
     operator = null;
+});
+
+backButton.addEventListener('click', () => {
+    display.textContent = display.textContent.slice(0, -1)
+    displayValue2 = display.textContent;
+    console.log(display.textContent.length);
 });
 
 // pseudocode
