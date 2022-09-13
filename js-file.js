@@ -41,13 +41,13 @@ const numberListener = (num) => {
             if (num.textContent !== '.') {
                 displayValue2 += num.textContent;
                 display.textContent = displayValue2;
-                if (displayValue !== '') displayValue = calculate();
+                if (displayValue !== '') total = calculate();
                 console.log(`displayValue = ${displayValue} ${operator} displayValue2 = ${displayValue2}`)
             }
         } else {
             displayValue2 += num.textContent;
             display.textContent = displayValue2;
-            if (displayValue !== '') displayValue = calculate();
+            if (displayValue !== '') total = calculate();
             console.log(`displayValue = ${displayValue} ${operator} displayValue2 = ${displayValue2}`)
         }
 
@@ -58,9 +58,9 @@ const numberListener = (num) => {
 const operatorListener = (operatorSign) => {
     operatorSign.addEventListener('click', () => {
         operator = operatorSign.textContent;
-        if (displayValue === '') displayValue = displayValue2;
+        displayValue === '' ? displayValue = displayValue2 : displayValue = total;
         display.textContent = displayValue;
-        displayValue2 = '';
+        displayValue2 = "";
 
     });
 }
@@ -86,7 +86,9 @@ operatorListener(division);
 
 equals.addEventListener('click', () => {
     // calculate();
-    display.textContent = displayValue;
+    display.textContent = total;
+    displayValue2 = "";
+    displayValue = total;
 });
 
 clear.addEventListener('click', () => {
@@ -99,6 +101,7 @@ clear.addEventListener('click', () => {
 backButton.addEventListener('click', () => {
     display.textContent = display.textContent.slice(0, -1)
     displayValue2 = display.textContent;
+    total = calculate();
     console.log(display.textContent.length);
 });
 
