@@ -37,7 +37,7 @@ const operate = (operator, a, b) =>
 
 const numberListener = (num) => {
     num.addEventListener('click', () => {
-        if (displayValue2.includes('.')) {
+        if (String(displayValue2).includes('.')) {
             if (num.textContent !== '.') {
                 displayValue2 += num.textContent;
                 display.textContent = displayValue2;
@@ -87,8 +87,8 @@ operatorListener(division);
 equals.addEventListener('click', () => {
     // calculate();
     display.textContent = total;
-    displayValue2 = "";
-    displayValue = total;
+    // displayValue2 = "";
+    displayValue2 = total;
 });
 
 clear.addEventListener('click', () => {
@@ -100,8 +100,8 @@ clear.addEventListener('click', () => {
 
 backButton.addEventListener('click', () => {
     display.textContent = display.textContent.slice(0, -1)
+    total = display.textContent;
     displayValue2 = display.textContent;
-    total = calculate();
     console.log(display.textContent.length);
 });
 
@@ -121,3 +121,16 @@ backButton.addEventListener('click', () => {
 
 // maybe need to be a total also
 //
+
+
+// firstNum operator secondNum
+// secondNum on screen and editable
+// on operator press again, total on screen and editable
+// firstnum now = total and is editable
+
+// if firstNum !empty and secondNum !empty calculate and firstnum = total and secondnum = ""
+// firstnum is now editable and recives inoutted numbers
+
+// adds to firstnum while forstnum is empty then when on operatoe press change a boolean if both firstnum and secodnnum not empty.
+// the result then in firstnum is now editable and then secodnnum set t empty.
+// if press again the boolean will change, now ready to add anumber which will be the sedond number
